@@ -6,28 +6,37 @@ import java.util.Objects;
 
 public class World {
     public static void main(String[] args) {
-        System.out.print("Start");
-        String[] p = {"f", "f", "r", "l"};
-        List<Direction> path = changeType(p); // or args to run from terminal
-        run(path);
-        properPrint("Stop");
+
+//        System.out.print("Start");
+//        String[] p = {"f", "f", "r", "l"};
+//        List<MoveDirection> path = changeType(p); // or args to run from terminal
+//        run(path);
+//        properPrint("Stop");
+
+        Vector2d position1 = new Vector2d(1, 2);
+        System.out.println(position1);
+        Vector2d position2 = new Vector2d(-2, 1);
+        System.out.println(position2);
+        System.out.println(position1.add(position2));
+
+
     }
 
-    static List<Direction> changeType(String[] path) {
+    static List<MoveDirection> changeType(String[] path) {
         return Arrays.stream(path).map(World::getType).filter(Objects::nonNull).toList();
     }
 
-    private static Direction getType(String arg) {
+    private static MoveDirection getType(String arg) {
         return switch (arg) {
-            case "f" -> Direction.FORWARD;
-            case "b" -> Direction.BACKWARD;
-            case "l" -> Direction.LEFT;
-            case "r" -> Direction.RIGHT;
+            case "f" -> MoveDirection.FORWARD;
+            case "b" -> MoveDirection.BACKWARD;
+            case "l" -> MoveDirection.LEFT;
+            case "r" -> MoveDirection.RIGHT;
             default -> null;
         };
     }
 
-    static void run(List<Direction> path) {
+    static void run(List<MoveDirection> path) {
         path.forEach(instruction -> {
             switch (instruction) {
                 case FORWARD -> properPrint("Zwierzak idzie do przodu");
