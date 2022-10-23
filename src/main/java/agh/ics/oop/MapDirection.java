@@ -2,89 +2,34 @@ package agh.ics.oop;
 
 
 public enum MapDirection {
-    NORTH,
-    SOUTH,
-    WEST,
-    EAST;
+    NORTH("Północ", new Vector2d(0, 1)),
+    EAST("Wschód", new Vector2d(1, 0)),
+    SOUTH("Południe", new Vector2d(0, -1)),
+    WEST("Zachód", new Vector2d(-1, 0));
+
+    private final String directionName;
+    private final Vector2d unitVector;
+
+    MapDirection(String directionName, Vector2d unitVector) {
+        this.directionName = directionName;
+        this.unitVector = unitVector;
+    }
 
     MapDirection next() {
-        switch (this) {
-            case EAST -> {
-                return SOUTH;
-            }
-            case SOUTH -> {
-                return WEST;
-            }
-            case WEST -> {
-                return NORTH;
-            }
-            case NORTH -> {
-                return EAST;
-            }
-            default -> {
-                return null;
-            }
-        }
+        return MapDirection.values()[(this.ordinal() + 1) % 4];
     }
 
     MapDirection previous() {
-        switch (this) {
-            case EAST -> {
-                return NORTH;
-            }
-            case NORTH -> {
-                return WEST;
-            }
-            case WEST -> {
-                return SOUTH;
-            }
-            case SOUTH -> {
-                return EAST;
-            }
-            default -> {
-                return null;
-            }
-        }
+        return this.ordinal() - 1 >= 0 ? MapDirection.values()[(this.ordinal() - 1) % 4] : MapDirection.values()[3];
     }
 
+
     Vector2d toUnitVector() {
-        switch (this) {
-            case NORTH -> {
-                return new Vector2d(0, 1);
-            }
-            case SOUTH -> {
-                return new Vector2d(0, -1);
-            }
-            case EAST -> {
-                return new Vector2d(1, 0);
-            }
-            case WEST -> {
-                return new Vector2d(-1, 0);
-            }
-            default -> {
-                return null;
-            }
-        }
+        return this.unitVector;
     }
 
     @Override
     public String toString() {
-        switch (this) {
-            case EAST -> {
-                return "Wschód";
-            }
-            case WEST -> {
-                return "Zachód";
-            }
-            case NORTH -> {
-                return "Północ";
-            }
-            case SOUTH -> {
-                return "Południe";
-            }
-            default -> {
-                return "";
-            }
-        }
+        return this.directionName;
     }
 }

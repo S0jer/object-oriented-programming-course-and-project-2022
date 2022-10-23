@@ -21,6 +21,16 @@ class Vector2dTest {
         assertThat(result).isEqualTo(expectedResult);
     }
 
+    static Stream<Arguments> precedesVerificationArgumentsProvider() {
+        return Stream.of(
+                arguments(new Vector2d(1, 1), new Vector2d(1, 1), true),
+                arguments(new Vector2d(-5, -1), new Vector2d(-11, 2), false),
+                arguments(new Vector2d(1, 1), new Vector2d(11, -2), false),
+                arguments(new Vector2d(35, 70), new Vector2d(10, 25), false),
+                arguments(new Vector2d(21, -37), new Vector2d(201, -12), true)
+        );
+    }
+
     @ParameterizedTest
     @MethodSource("followsVerificationArgumentsProvider")
     void shouldVerifyFollows(Vector2d startVector, Vector2d toCompareVector, boolean expectedResult) {
@@ -29,6 +39,16 @@ class Vector2dTest {
 
         //Then
         assertThat(result).isEqualTo(expectedResult);
+    }
+
+    static Stream<Arguments> followsVerificationArgumentsProvider() {
+        return Stream.of(
+                arguments(new Vector2d(1, 1), new Vector2d(1, 1), true),
+                arguments(new Vector2d(1, 1), new Vector2d(-11, 2), false),
+                arguments(new Vector2d(35, 70), new Vector2d(102, 25), false),
+                arguments(new Vector2d(21, 37), new Vector2d(201, 122), false),
+                arguments(new Vector2d(17, 27), new Vector2d(13, 22), true)
+        );
     }
 
     @ParameterizedTest
@@ -42,6 +62,15 @@ class Vector2dTest {
         assertThat(upperRightResult.y).isEqualTo(expectedVector.y);
     }
 
+    static Stream<Arguments> upperRightVerificationArgumentsProvider() {
+        return Stream.of(
+                arguments(new Vector2d(1, 1), new Vector2d(1, 1), new Vector2d(1, 1)),
+                arguments(new Vector2d(11, -2), new Vector2d(-11, 2), new Vector2d(11, 2)),
+                arguments(new Vector2d(-11, 2), new Vector2d(11, -2), new Vector2d(11, 2)),
+                arguments(new Vector2d(-35, -70), new Vector2d(-25, -51), new Vector2d(-25, -51))
+        );
+    }
+
     @ParameterizedTest
     @MethodSource("lowerLeftVerificationArgumentsProvider")
     void shouldVerifyLowerLeft(Vector2d vector1, Vector2d vector2, Vector2d expectedVector) {
@@ -51,6 +80,15 @@ class Vector2dTest {
         //Then
         assertThat(lowerLeftResult.x).isEqualTo(expectedVector.x);
         assertThat(lowerLeftResult.y).isEqualTo(expectedVector.y);
+    }
+
+    static Stream<Arguments> lowerLeftVerificationArgumentsProvider() {
+        return Stream.of(
+                arguments(new Vector2d(1, 1), new Vector2d(1, 1), new Vector2d(1, 1)),
+                arguments(new Vector2d(11, -2), new Vector2d(-11, 2), new Vector2d(-11, -2)),
+                arguments(new Vector2d(-11, 2), new Vector2d(11, -2), new Vector2d(-11, -2)),
+                arguments(new Vector2d(-35, -70), new Vector2d(-25, -51), new Vector2d(-35, -70))
+        );
     }
 
     @ParameterizedTest
@@ -64,6 +102,15 @@ class Vector2dTest {
         assertThat(addResult.y).isEqualTo(expectedVector.y);
     }
 
+    static Stream<Arguments> addVerificationArgumentsProvider() {
+        return Stream.of(
+                arguments(new Vector2d(1, 1), new Vector2d(1, 1), new Vector2d(2, 2)),
+                arguments(new Vector2d(11, -2), new Vector2d(-11, 2), new Vector2d(0, 0)),
+                arguments(new Vector2d(-11, 2), new Vector2d(11, -2), new Vector2d(0, 0)),
+                arguments(new Vector2d(-35, -70), new Vector2d(-25, -51), new Vector2d(-60, -121))
+        );
+    }
+
     @ParameterizedTest
     @MethodSource("subtractVerificationArgumentsProvider")
     void shouldVerifySubtract(Vector2d mainVector, Vector2d toSubtractVector, Vector2d expectedVector) {
@@ -73,6 +120,15 @@ class Vector2dTest {
         //Then
         assertThat(subtractResult.x).isEqualTo(expectedVector.x);
         assertThat(subtractResult.y).isEqualTo(expectedVector.y);
+    }
+
+    static Stream<Arguments> subtractVerificationArgumentsProvider() {
+        return Stream.of(
+                arguments(new Vector2d(1, 1), new Vector2d(1, 1), new Vector2d(0, 0)),
+                arguments(new Vector2d(11, -2), new Vector2d(-11, 2), new Vector2d(22, -4)),
+                arguments(new Vector2d(-11, 2), new Vector2d(11, -2), new Vector2d(-22, 4)),
+                arguments(new Vector2d(-35, -70), new Vector2d(-25, -51), new Vector2d(-10, -19))
+        );
     }
 
     @ParameterizedTest
@@ -86,6 +142,15 @@ class Vector2dTest {
         assertThat(convertedVector.y).isEqualTo(expectedVector.y);
     }
 
+    static Stream<Arguments> oppositeVerificationArgumentsProvider() {
+        return Stream.of(
+                arguments(new Vector2d(1, 1), new Vector2d(-1, -1)),
+                arguments(new Vector2d(11, -2), new Vector2d(-11, 2)),
+                arguments(new Vector2d(-11, 2), new Vector2d(11, -2)),
+                arguments(new Vector2d(-35, -70), new Vector2d(35, 70))
+        );
+    }
+
     @ParameterizedTest
     @MethodSource("equalsVerificationArgumentsProvider")
     void shouldVerifyEquals(Vector2d mainVector, Object toCompareVector, boolean expectedResult) {
@@ -94,82 +159,6 @@ class Vector2dTest {
 
         //Then
         assertThat(equalsResult).isEqualTo(expectedResult);
-    }
-
-    @ParameterizedTest
-    @MethodSource("toStringVerificationArgumentsProvider")
-    void shouldVerifyToString(Vector2d toPrintVector, String expectedPrint) {
-        //When
-        String stringOfVector = toPrintVector.toString();
-
-        //Then
-        assertThat(stringOfVector).isEqualTo(expectedPrint);
-    }
-
-
-    static Stream<Arguments> precedesVerificationArgumentsProvider() {
-        return Stream.of(
-                arguments(new Vector2d(1, 1), new Vector2d(1, 1), true),
-                arguments(new Vector2d(-5, -1), new Vector2d(-11, 2), false),
-                arguments(new Vector2d(1, 1), new Vector2d(11, -2), false),
-                arguments(new Vector2d(35, 70), new Vector2d(10, 25), false),
-                arguments(new Vector2d(21, -37), new Vector2d(201, -12), true)
-        );
-    }
-
-    static Stream<Arguments> followsVerificationArgumentsProvider() {
-        return Stream.of(
-                arguments(new Vector2d(1, 1), new Vector2d(1, 1), true),
-                arguments(new Vector2d(1, 1), new Vector2d(-11, 2), false),
-                arguments(new Vector2d(35, 70), new Vector2d(102, 25), false),
-                arguments(new Vector2d(21, 37), new Vector2d(201, 122), false),
-                arguments(new Vector2d(17, 27), new Vector2d(13, 22), true)
-        );
-    }
-
-    static Stream<Arguments> upperRightVerificationArgumentsProvider() {
-        return Stream.of(
-                arguments(new Vector2d(1, 1), new Vector2d(1, 1), new Vector2d(1, 1)),
-                arguments(new Vector2d(11, -2), new Vector2d(-11, 2), new Vector2d(11, 2)),
-                arguments(new Vector2d(-11, 2), new Vector2d(11, -2), new Vector2d(11, 2)),
-                arguments(new Vector2d(-35, -70), new Vector2d(-25, -51), new Vector2d(-25, -51))
-        );
-    }
-
-    static Stream<Arguments> lowerLeftVerificationArgumentsProvider() {
-        return Stream.of(
-                arguments(new Vector2d(1, 1), new Vector2d(1, 1), new Vector2d(1, 1)),
-                arguments(new Vector2d(11, -2), new Vector2d(-11, 2), new Vector2d(-11, -2)),
-                arguments(new Vector2d(-11, 2), new Vector2d(11, -2), new Vector2d(-11, -2)),
-                arguments(new Vector2d(-35, -70), new Vector2d(-25, -51), new Vector2d(-35, -70))
-        );
-    }
-
-    static Stream<Arguments> addVerificationArgumentsProvider() {
-        return Stream.of(
-                arguments(new Vector2d(1, 1), new Vector2d(1, 1), new Vector2d(2, 2)),
-                arguments(new Vector2d(11, -2), new Vector2d(-11, 2), new Vector2d(0, 0)),
-                arguments(new Vector2d(-11, 2), new Vector2d(11, -2), new Vector2d(0, 0)),
-                arguments(new Vector2d(-35, -70), new Vector2d(-25, -51), new Vector2d(-60, -121))
-        );
-    }
-
-    static Stream<Arguments> subtractVerificationArgumentsProvider() {
-        return Stream.of(
-                arguments(new Vector2d(1, 1), new Vector2d(1, 1), new Vector2d(0, 0)),
-                arguments(new Vector2d(11, -2), new Vector2d(-11, 2), new Vector2d(22, -4)),
-                arguments(new Vector2d(-11, 2), new Vector2d(11, -2), new Vector2d(-22, 4)),
-                arguments(new Vector2d(-35, -70), new Vector2d(-25, -51), new Vector2d(-10, -19))
-        );
-    }
-
-    static Stream<Arguments> oppositeVerificationArgumentsProvider() {
-        return Stream.of(
-                arguments(new Vector2d(1, 1), new Vector2d(-1, -1)),
-                arguments(new Vector2d(11, -2), new Vector2d(-11, 2)),
-                arguments(new Vector2d(-11, 2), new Vector2d(11, -2)),
-                arguments(new Vector2d(-35, -70), new Vector2d(35, 70))
-        );
     }
 
     static Stream<Arguments> equalsVerificationArgumentsProvider() {
@@ -183,6 +172,16 @@ class Vector2dTest {
                 arguments(sameVector, sameVector, true),
                 arguments(new Vector2d(-35, -70), new Vector2d(-35, -70), true)
         );
+    }
+
+    @ParameterizedTest
+    @MethodSource("toStringVerificationArgumentsProvider")
+    void shouldVerifyToString(Vector2d toPrintVector, String expectedPrint) {
+        //When
+        String stringOfVector = toPrintVector.toString();
+
+        //Then
+        assertThat(stringOfVector).isEqualTo(expectedPrint);
     }
 
     static Stream<Arguments> toStringVerificationArgumentsProvider() {

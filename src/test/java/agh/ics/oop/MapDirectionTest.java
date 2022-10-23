@@ -22,6 +22,15 @@ class MapDirectionTest {
         assertThat(result).isEqualTo(expectedDirection);
     }
 
+    static Stream<Arguments> nextVerificationArgumentsProvider() {
+        return Stream.of(
+                arguments(NORTH, EAST),
+                arguments(EAST, SOUTH),
+                arguments(SOUTH, WEST),
+                arguments(WEST, NORTH)
+        );
+    }
+
     @ParameterizedTest
     @MethodSource("previousVerificationArgumentsProvider")
     void previous(MapDirection startDirection, MapDirection expectedDirection) {
@@ -30,16 +39,6 @@ class MapDirectionTest {
 
         //Then
         assertThat(result).isEqualTo(expectedDirection);
-    }
-
-
-    static Stream<Arguments> nextVerificationArgumentsProvider() {
-        return Stream.of(
-                arguments(NORTH, EAST),
-                arguments(EAST, SOUTH),
-                arguments(SOUTH, WEST),
-                arguments(WEST, NORTH)
-        );
     }
 
     static Stream<Arguments> previousVerificationArgumentsProvider() {

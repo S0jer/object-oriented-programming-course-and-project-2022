@@ -24,7 +24,6 @@ public class Vector2d {
     }
 
     Vector2d lowerLeft(Vector2d other) {
-        // this.x <= other.x ? this.x : other.x, this.y <= other.y ? this.y : other.y
         return new Vector2d(Math.min(this.x, other.x), Math.min(this.y, other.y));
     }
 
