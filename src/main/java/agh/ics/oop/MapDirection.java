@@ -2,10 +2,10 @@ package agh.ics.oop;
 
 
 public enum MapDirection {
-    NORTH("Północ", new Vector2d(0, 1)),
-    EAST("Wschód", new Vector2d(1, 0)),
-    SOUTH("Południe", new Vector2d(0, -1)),
-    WEST("Zachód", new Vector2d(-1, 0));
+    NORTH("N", new Vector2d(0, 1)),
+    EAST("E", new Vector2d(1, 0)),
+    SOUTH("S", new Vector2d(0, -1)),
+    WEST("W", new Vector2d(-1, 0));
 
     private final String directionName;
     private final Vector2d unitVector;

@@ -7,9 +7,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class AnimalTest {
@@ -26,11 +28,12 @@ class AnimalTest {
     }
 
     public static Stream<Arguments> isAtTestProvider() {
+        WorldMap worldMap = new RectangularMap(4, 4);
         return Stream.of(
-                arguments(new Animal(), new Vector2d(2, 2), true),
-                arguments(new Animal(), new Vector2d(2, -1), false),
-                arguments(new Animal(), new Vector2d(-2, 2), false),
-                arguments(new Animal(), new Vector2d(-21, 17), false)
+                arguments(new Animal(worldMap), new Vector2d(2, 2), true),
+                arguments(new Animal(worldMap), new Vector2d(2, -1), false),
+                arguments(new Animal(worldMap), new Vector2d(-2, 2), false),
+                arguments(new Animal(worldMap), new Vector2d(-21, 17), false)
         );
     }
 
@@ -43,6 +46,7 @@ class AnimalTest {
 
         //Then
         assertThat(result).isEqualTo(check);
+        assertTrue(Objects.deepEquals(result, check));
     }
 
     static Stream<Arguments> borderAndMovesArgumentsProvider() {
@@ -79,10 +83,6 @@ class AnimalTest {
     }
 
     static Animal AnimalCreator(int x, int y, MapDirection direction) {
-        Animal animal = new Animal();
-        animal.setAnimalPosition(new Vector2d(x, y));
-        animal.setAnimalDirection(direction);
-
-        return animal;
+        return new Animal(direction, new Vector2d(x, y));
     }
 }

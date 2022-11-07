@@ -11,12 +11,6 @@ public class OptionsParser {
     }
 
     private static MoveDirection getType(String arg) {
-        return switch (arg) {
-            case "f", "forward" -> MoveDirection.FORWARD;
-            case "b", "backward" -> MoveDirection.BACKWARD;
-            case "l", "left" -> MoveDirection.LEFT;
-            case "r", "right" -> MoveDirection.RIGHT;
-            default -> null;
-        };
+        return MoveDirection.fromString(arg);
     }
 }

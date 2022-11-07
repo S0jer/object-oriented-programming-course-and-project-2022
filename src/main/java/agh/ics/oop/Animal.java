@@ -2,21 +2,10 @@ package agh.ics.oop;
 
 public class Animal {
 
+    private WorldMap animalMap;
     private MapDirection animalDirection = MapDirection.NORTH;
 
     private Vector2d animalPosition = new Vector2d(2, 2);
-
-    private final Vector2d upperBorder = new Vector2d(4, 4);
-
-    private final Vector2d lowerBorder = new Vector2d(0, 0);
-
-    public void setAnimalDirection(MapDirection animalDirection) {
-        this.animalDirection = animalDirection;
-    }
-
-    public void setAnimalPosition(Vector2d animalPosition) {
-        this.animalPosition = animalPosition;
-    }
 
     public MapDirection getAnimalDirection() {
         return this.animalDirection;
@@ -26,8 +15,19 @@ public class Animal {
         return this.animalPosition;
     }
 
-    public Animal() {
-        // TODO document why this constructor is empty
+    public Animal(WorldMap map) {
+        this.animalMap = map;
+    }
+
+    public Animal(WorldMap map, Vector2d initialPosition) {
+        this.animalMap = map;
+        this.animalPosition = initialPosition;
+    }
+
+    public Animal(MapDirection initialDirection, Vector2d initialPosition) {
+        this.animalDirection = initialDirection;
+        this.animalPosition = initialPosition;
+
     }
 
     public boolean isAt(Vector2d position) {
@@ -37,15 +37,18 @@ public class Animal {
     public void move(MoveDirection direction) {
         switch (direction) {
             case FORWARD -> {
-                if (animalPosition.add(this.animalDirection.toUnitVector()).follows(lowerBorder)
-                        && animalPosition.add(this.animalDirection.toUnitVector()).precedes(upperBorder)) {
-                    animalPosition = animalPosition.add(this.animalDirection.toUnitVector());
+                Vector2d nextAnimalPosition = animalPosition.add(this.animalDirection.toUnitVector());
+                if (animalMap.canMoveTo(nextAnimalPosition)) {
+                    animalMap.move(this, nextAnimalPosition);
+                    animalPosition = nextAnimalPosition;
+//                    nextAnimalPosition.follows(lowerBorder) && nextAnimalPosition.precedes(upperBorder)
                 }
             }
             case BACKWARD -> {
-                if (animalPosition.subtract(this.animalDirection.toUnitVector()).follows(lowerBorder)
-                        && animalPosition.subtract(this.animalDirection.toUnitVector()).precedes(upperBorder)) {
-                    animalPosition = animalPosition.subtract(this.animalDirection.toUnitVector());
+                Vector2d nextAnimalPosition = animalPosition.subtract(this.animalDirection.toUnitVector());
+                if (animalMap.canMoveTo(nextAnimalPosition)) {
+                    animalMap.move(this, nextAnimalPosition);
+                    animalPosition = nextAnimalPosition;
                 }
             }
             case LEFT -> animalDirection = animalDirection.previous();
@@ -56,8 +59,6 @@ public class Animal {
 
     @Override
     public String toString() {
-        return animalDirection.toString()
-                + " | "
-                + animalPosition.toString();
+        return animalDirection.toString();
     }
 }
