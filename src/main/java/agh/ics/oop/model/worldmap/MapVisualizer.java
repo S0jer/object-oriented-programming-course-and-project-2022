@@ -1,15 +1,17 @@
-package agh.ics.oop;
+package agh.ics.oop.model.worldmap;
+
+import agh.ics.oop.model.Vector2d;
 
 public class MapVisualizer {
     private static final String EMPTY_CELL = " ";
     private static final String FRAME_SEGMENT = "-";
     private static final String CELL_SEGMENT = "|";
-    private WorldMap map;
+    private final WorldMap map;
 
     /**
      * Initializes the MapVisualizer with an instance of map to visualize.
      *
-     * @param map
+     * @param map instance of map to visualize
      */
     public MapVisualizer(WorldMap map) {
         this.map = map;

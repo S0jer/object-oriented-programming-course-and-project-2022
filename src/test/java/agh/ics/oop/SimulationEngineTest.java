@@ -1,5 +1,9 @@
 package agh.ics.oop;
 
+import agh.ics.oop.model.MoveDirection;
+import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.worldmap.WorldMap;
+import agh.ics.oop.model.worldmap.GrassField;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -37,8 +41,7 @@ class SimulationEngineTest {
         List<Vector2d> animals = new ArrayList<>(Arrays.asList(new Vector2d(2, 2), new Vector2d(3, 4)));
 
         return Stream.of(
-                arguments(new RectangularMap(10, 5), moveDirectionsTwo, animals, new ArrayList<>(Arrays.asList(new Vector2d(2, 0), new Vector2d(3, 5)))),
-                arguments(new RectangularMap(10, 5), moveDirectionsAround, animals, new ArrayList<>(Arrays.asList(new Vector2d(6, 2), new Vector2d(3, 5)))));
+                arguments(new GrassField(10), moveDirectionsTwo, animals, new ArrayList<>(Arrays.asList(new Vector2d(2, -1), new Vector2d(3, 7)))),
+                arguments(new GrassField(10), moveDirectionsAround, animals, new ArrayList<>(Arrays.asList(new Vector2d(6, 2), new Vector2d(3, 5)))));
     }
-
 }

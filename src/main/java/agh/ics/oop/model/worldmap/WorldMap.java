@@ -1,4 +1,7 @@
-package agh.ics.oop;
+package agh.ics.oop.model.worldmap;
+
+import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.mapobjects.WorldMapElement;
 
 public interface WorldMap {
     /**
@@ -10,12 +13,12 @@ public interface WorldMap {
     boolean canMoveTo(Vector2d position);
 
     /**
-     * Place a animal on the map.
+     * Place an worldMapElement on the map.
      *
-     * @param animal The animal to place on the map.
+     * @param worldMapElement The animal to place on the map.
      * @return True if the animal was placed. The animal cannot be placed if the map is already occupied.
      */
-    boolean place(Animal animal);
+    boolean place(WorldMapElement worldMapElement);
 
     /**
      * Return true if given position on the map is occupied. Should not be
@@ -33,7 +36,9 @@ public interface WorldMap {
      * @param position The position of the object.
      * @return Object or null if the position is not occupied.
      */
-    Object objectAt(Vector2d position);
+    WorldMapElement objectAt(Vector2d position);
 
-    void move(Animal animal, Vector2d toPosition);
+    void remove(Vector2d position);
+
+    void placeGrass(Integer grass);
 }

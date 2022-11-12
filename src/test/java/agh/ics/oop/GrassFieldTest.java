@@ -2,19 +2,22 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.mapobjects.Animal;
 import agh.ics.oop.model.Vector2d;
-import agh.ics.oop.model.worldmap.GrassField;
+import agh.ics.oop.model.mapobjects.Grass;
 import agh.ics.oop.model.worldmap.WorldMap;
+import agh.ics.oop.model.worldmap.GrassField;
 import agh.ics.oop.model.worldmap.RectangularMap;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class RectangularMapTest {
+
+class GrassFieldTest {
+
 
     @Test
-    void shouldBeAbleToMoveAnimalInEmptyMap() {
+    void shouldBeAbleToCanMoveGrassInEmptyMap() {
         //given
-        WorldMap map = new RectangularMap();
+        WorldMap map = new GrassField(10);
 
         //when
         boolean result = map.canMoveTo(new Vector2d(1, 1));
@@ -24,9 +27,9 @@ class RectangularMapTest {
     }
 
     @Test
-    void shouldNotBeAbleToMoveAnimalOccupiedPosition() {
+    void shouldNotBeAbleToCanMoveGrassOccupiedPosition() {
         //given
-        WorldMap map = new RectangularMap();
+        WorldMap map = new GrassField(10);
         map.place(new Animal(map, new Vector2d(1, 2)));
 
         //when
@@ -37,7 +40,7 @@ class RectangularMapTest {
     }
 
     @Test
-    void shouldBeAbleToPlaceAnimalOnFreePosition() {
+    void shouldBeAbleToPlaceGrassOnFreePosition() {
         //given
         WorldMap map = new RectangularMap();
         Animal animal = new Animal(map, new Vector2d(1, 1));
@@ -50,9 +53,9 @@ class RectangularMapTest {
     }
 
     @Test
-    void shouldNotBeAbleToPlaceAnimal() {
+    void shouldNotBeAbleToGrassAnimal() {
         //given
-        WorldMap map = new RectangularMap();
+        WorldMap map = new GrassField(10);
         Animal animal = new Animal(map, new Vector2d(1, 1));
 
         //when
@@ -66,7 +69,7 @@ class RectangularMapTest {
     @Test
     void shouldReturnThatPositionIsOccupied() {
         //given
-        WorldMap map = new RectangularMap();
+        WorldMap map = new GrassField(10);
         Vector2d animalPosition = new Vector2d(1, 1);
         Animal animal = new Animal(map, animalPosition);
 
@@ -92,9 +95,9 @@ class RectangularMapTest {
     }
 
     @Test
-    void shouldReturnNullFromEmptyPlace() {
+    void shouldReturnObjectFromEmptyPlace() {
         //given
-        WorldMap map = new RectangularMap();
+        WorldMap map = new GrassField(10);
 
         //when
         Object object = map.objectAt(new Vector2d(1, 1));
@@ -106,7 +109,7 @@ class RectangularMapTest {
     @Test
     void shouldReturnAnimalFromOccupiedPlace() {
         //given
-        WorldMap map = new RectangularMap();
+        WorldMap map = new GrassField(10);
         Vector2d animalPosition = new Vector2d(1, 1);
         Animal animal = new Animal(map, animalPosition);
 
@@ -118,11 +121,10 @@ class RectangularMapTest {
         assertThat(object).isEqualTo(animal);
     }
 
-
     @Test
     void shouldGetNullIfBehindBorders() {
         //given
-        WorldMap map = new RectangularMap();
+        WorldMap map = new GrassField(10);
 
         //when
         Object result = map.objectAt(new Vector2d(10, 10));
@@ -134,7 +136,7 @@ class RectangularMapTest {
     @Test
     void shouldReturnFalseWhenIndexOutsideOfMap() {
         //given
-        WorldMap map = new RectangularMap();
+        WorldMap map = new GrassField(10);
 
         //when
         boolean result = map.isOccupied(new Vector2d(-1, -1));
@@ -147,14 +149,13 @@ class RectangularMapTest {
     void shouldGrassIsRemoved() {
         //given
         WorldMap map = new GrassField(0);
-        Vector2d animalPosition = new Vector2d(1, 1);
-        Animal animal = new Animal(map, animalPosition);
-        map.place(animal);
+        Vector2d grassPosition = new Vector2d(1, 1);
+        Grass grass = new Grass(map, grassPosition);
 
         //when
-        map.remove(animalPosition);
+        map.remove(grassPosition);
 
         //then
-        assertThat(map.objectAt(animalPosition)).isNull();
+        assertThat(map.objectAt(grassPosition)).isNull();
     }
 }

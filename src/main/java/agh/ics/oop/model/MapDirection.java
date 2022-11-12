@@ -1,4 +1,4 @@
-package agh.ics.oop;
+package agh.ics.oop.model;
 
 
 public enum MapDirection {
@@ -15,16 +15,16 @@ public enum MapDirection {
         this.unitVector = unitVector;
     }
 
-    MapDirection next() {
+    public MapDirection next() {
         return MapDirection.values()[(this.ordinal() + 1) % 4];
     }
 
-    MapDirection previous() {
+    public MapDirection previous() {
         return this.ordinal() - 1 >= 0 ? MapDirection.values()[(this.ordinal() - 1) % 4] : MapDirection.values()[3];
     }
 
 
-    Vector2d toUnitVector() {
+    public Vector2d toUnitVector() {
         return this.unitVector;
     }
 

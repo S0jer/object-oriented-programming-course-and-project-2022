@@ -1,4 +1,4 @@
-package agh.ics.oop;
+package agh.ics.oop.model;
 
 import java.util.Arrays;
 
@@ -17,7 +17,7 @@ public enum MoveDirection {
         this.nameOfValueTwo = nameOfValueTwo;
     }
 
-    static MoveDirection fromString(String fromString) {
+    public static MoveDirection fromString(String fromString) {
         return Arrays.stream(MoveDirection.values()).filter(x -> x.nameOfValueOne.equals(fromString) || x.nameOfValueTwo.equals(fromString)).findAny().orElse(null);
     }
 }

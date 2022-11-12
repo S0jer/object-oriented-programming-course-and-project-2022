@@ -1,5 +1,10 @@
 package agh.ics.oop;
 
+import agh.ics.oop.model.mapobjects.Animal;
+import agh.ics.oop.model.MoveDirection;
+import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.worldmap.WorldMap;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +22,6 @@ public class SimulationEngine implements Engine {
         addToMap();
     }
 
-
     private void addToMap() {
         this.animalList = new ArrayList<>();
         for (Vector2d vector2d : this.animalsInitationalPosition) {
@@ -32,7 +36,7 @@ public class SimulationEngine implements Engine {
         int i = 0;
         System.out.println(this.worldMap);
         for (MoveDirection moveDirection : this.animalsMoves) {
-            this.animalList.get(i % this.animalList.size()).move(moveDirection);
+            this.animalList.get(i % this.animalList.size()).moveAnimal(moveDirection);
             i++;
             System.out.println(this.worldMap);
         }
