@@ -1,53 +1,70 @@
 package agh.ics.oop.model.mapobjects;
 
+import agh.ics.oop.PositionChangeObserver;
 import agh.ics.oop.model.MapDirection;
 import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
 import agh.ics.oop.model.worldmap.WorldMap;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class Animal extends WorldMapElement {
 
     private final WorldMap worldMap;
     private MapDirection animalDirection = MapDirection.NORTH;
 
+    private Vector2d animalPosition;
+
+    private final Set<PositionChangeObserver> observers = new HashSet<>();
+
+    private void setPosition(Vector2d nextPosition) {
+        this.animalPosition = nextPosition;
+    }
+
+    public Vector2d getPosition() {
+        return animalPosition;
+    }
+
     public MapDirection getAnimalDirection() {
         return this.animalDirection;
     }
 
     public Animal(WorldMap map) {
-        super(new Vector2d(2, 2));
+        super();
+        this.animalPosition = new Vector2d(2, 2);
         this.worldMap = map;
     }
 
     public Animal(WorldMap map, Vector2d initialPosition) {
-        super(initialPosition);
+        super();
+        this.animalPosition = initialPosition;
         this.worldMap = map;
     }
 
     public Animal(WorldMap map, MapDirection initialDirection, Vector2d initialPosition) {
-        super(initialPosition);
+        super();
         this.worldMap = map;
         this.animalDirection = initialDirection;
+        this.animalPosition = initialPosition;
     }
 
     public void moveAnimal(MoveDirection direction) {
         switch (direction) {
             case FORWARD -> {
-                Vector2d nextAnimalPosition = super.getPosition().add(this.animalDirection.toUnitVector());
+                Vector2d nextAnimalPosition = this.getPosition().add(this.animalDirection.toUnitVector());
                 if (worldMap.canMoveTo(nextAnimalPosition)) {
-                    updateMapPosition(nextAnimalPosition);
                     Vector2d previousPosition = this.getPosition();
-                    super.setPosition(nextAnimalPosition);
-                    move(this, previousPosition);
+                    this.setPosition(nextAnimalPosition);
+                    positionChanged(previousPosition, nextAnimalPosition);
                 }
             }
             case BACKWARD -> {
-                Vector2d nextAnimalPosition = super.getPosition().subtract(this.animalDirection.toUnitVector());
+                Vector2d nextAnimalPosition = this.getPosition().subtract(this.animalDirection.toUnitVector());
                 if (worldMap.canMoveTo(nextAnimalPosition)) {
-                    updateMapPosition(nextAnimalPosition);
                     Vector2d previousPosition = this.getPosition();
-                    super.setPosition(nextAnimalPosition);
-                    move(this, previousPosition);
+                    this.setPosition(nextAnimalPosition);
+                    positionChanged(previousPosition, nextAnimalPosition);
                 }
             }
             case LEFT -> animalDirection = animalDirection.previous();
@@ -56,19 +73,22 @@ public class Animal extends WorldMapElement {
 
     }
 
-    private void updateMapPosition(Vector2d nextAnimalPosition) {
-        if (worldMap.isOccupied(nextAnimalPosition)) {
-            WorldMapElement worldMapElement = worldMap.objectAt(nextAnimalPosition);
-            worldMap.objectAt(nextAnimalPosition).move(worldMapElement, nextAnimalPosition);
-        }
+    public boolean isAt(Vector2d position) {
+        return this.getPosition().equals(position);
+    }
+
+    void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+        this.observers.forEach(o -> o.positionChanged(oldPosition, newPosition));
     }
 
     @Override
-    public void move(WorldMapElement worldMapElement, Vector2d previousPosition) {
-        if (worldMap.canMoveTo(this.getPosition())) {
-            worldMap.place(this);
-            worldMap.remove(previousPosition);
-        }
+    public void addObserver(PositionChangeObserver observer) {
+        this.observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(PositionChangeObserver observer) {
+        this.observers.remove(observer);
     }
 
     @Override

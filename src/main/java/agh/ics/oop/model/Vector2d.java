@@ -39,6 +39,14 @@ public class Vector2d {
         return new Vector2d(-1 * this.x, -1 * this.y);
     }
 
+
+    @Override
+    public String toString() {
+        return "(" + x +
+                "," + y +
+                ")";
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,16 +55,8 @@ public class Vector2d {
         return x == vector2d.x && y == vector2d.y;
     }
 
-
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
-    }
-
-    @Override
-    public String toString() {
-        return "(" + x +
-                "," + y +
-                ")";
     }
 }

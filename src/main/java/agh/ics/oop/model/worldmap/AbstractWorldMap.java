@@ -1,13 +1,14 @@
 package agh.ics.oop.model.worldmap;
 
+import agh.ics.oop.PositionChangeObserver;
 import agh.ics.oop.model.mapobjects.Animal;
 import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.mapobjects.Grass;
 import agh.ics.oop.model.mapobjects.WorldMapElement;
 
 import java.util.*;
 
-public abstract class AbstractWorldMap implements WorldMap {
-
+public abstract class AbstractWorldMap implements PositionChangeObserver, WorldMap {
 
     private final Map<Vector2d, WorldMapElement> worldMap = new HashMap<>();
 
@@ -23,6 +24,7 @@ public abstract class AbstractWorldMap implements WorldMap {
     @Override
     public boolean place(WorldMapElement worldMapElement) {
         if (this.canMoveTo(worldMapElement.getPosition())) {
+            worldMapElement.addObserver(this);
             worldMap.put(worldMapElement.getPosition(), worldMapElement);
             return true;
         }
@@ -57,6 +59,17 @@ public abstract class AbstractWorldMap implements WorldMap {
             this.upperBorder = this.upperBorder.upperRight(vector2d);
         });
     }
+
+    @Override
+    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+        WorldMapElement worldMapElement = worldMap.get(oldPosition);
+        worldMap.remove(oldPosition);
+        if (worldMap.get(newPosition) instanceof Grass) {
+            this.placeGrass(1);
+        }
+        worldMap.put(newPosition, worldMapElement);
+    }
+
     @Override
     public void placeGrass(Integer grass) {
     }

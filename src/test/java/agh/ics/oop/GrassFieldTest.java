@@ -2,7 +2,6 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.mapobjects.Animal;
 import agh.ics.oop.model.Vector2d;
-import agh.ics.oop.model.mapobjects.Grass;
 import agh.ics.oop.model.worldmap.WorldMap;
 import agh.ics.oop.model.worldmap.GrassField;
 import agh.ics.oop.model.worldmap.RectangularMap;
@@ -42,7 +41,7 @@ class GrassFieldTest {
     @Test
     void shouldBeAbleToPlaceGrassOnFreePosition() {
         //given
-        WorldMap map = new RectangularMap();
+        WorldMap map = new RectangularMap(new Vector2d(0, 0), new Vector2d(5, 5));
         Animal animal = new Animal(map, new Vector2d(1, 1));
 
         //when
@@ -84,7 +83,7 @@ class GrassFieldTest {
     @Test
     void shouldReturnThatPositionIsNotOccupied() {
         //given
-        WorldMap map = new RectangularMap();
+        WorldMap map = new RectangularMap(new Vector2d(0, 0), new Vector2d(5, 5));
         Vector2d positionToCheck = new Vector2d(1, 1);
 
         //when
@@ -97,7 +96,7 @@ class GrassFieldTest {
     @Test
     void shouldReturnObjectFromEmptyPlace() {
         //given
-        WorldMap map = new GrassField(10);
+        WorldMap map = new GrassField(0);
 
         //when
         Object object = map.objectAt(new Vector2d(1, 1));
@@ -150,7 +149,6 @@ class GrassFieldTest {
         //given
         WorldMap map = new GrassField(0);
         Vector2d grassPosition = new Vector2d(1, 1);
-        Grass grass = new Grass(map, grassPosition);
 
         //when
         map.remove(grassPosition);

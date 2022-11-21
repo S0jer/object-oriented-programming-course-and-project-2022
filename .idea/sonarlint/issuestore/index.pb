@@ -12,5 +12,3 @@ X
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
-W
-'src/main/java/agh/ics/oop/Vector2d.java,e\4\e441cbbef22b4fcf4ac64e2d26efcd4f3eca0e2f
