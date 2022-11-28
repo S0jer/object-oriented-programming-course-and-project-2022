@@ -8,6 +8,7 @@ import agh.ics.oop.model.worldmap.RectangularMap;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class GrassFieldTest {
@@ -52,17 +53,22 @@ class GrassFieldTest {
     }
 
     @Test
-    void shouldNotBeAbleToGrassAnimal() {
+    void shouldNotBeAbleToPlaceAnimal() {
         //given
         WorldMap map = new GrassField(10);
         Animal animal = new Animal(map, new Vector2d(1, 1));
+        String expectedMessage = "Can not place WorldMapObject at (1,1)";
 
         //when
         map.place(animal);
-        boolean result = map.place(animal);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            map.place(animal);
+        });
 
-        //then
-        assertThat(result).isFalse();
+        String actualMessage = exception.getMessage();
+
+        //Then
+        assertThat(actualMessage).contains(expectedMessage);
     }
 
     @Test

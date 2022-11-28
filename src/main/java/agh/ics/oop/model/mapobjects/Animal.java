@@ -19,7 +19,9 @@ public class Animal extends WorldMapElement {
     private final Set<PositionChangeObserver> observers = new HashSet<>();
 
     private void setPosition(Vector2d nextPosition) {
+        Vector2d oldPosition = this.animalPosition;
         this.animalPosition = nextPosition;
+        positionChanged(oldPosition, nextPosition);
     }
 
     public Vector2d getPosition() {
@@ -54,17 +56,13 @@ public class Animal extends WorldMapElement {
             case FORWARD -> {
                 Vector2d nextAnimalPosition = this.getPosition().add(this.animalDirection.toUnitVector());
                 if (worldMap.canMoveTo(nextAnimalPosition)) {
-                    Vector2d previousPosition = this.getPosition();
                     this.setPosition(nextAnimalPosition);
-                    positionChanged(previousPosition, nextAnimalPosition);
                 }
             }
             case BACKWARD -> {
                 Vector2d nextAnimalPosition = this.getPosition().subtract(this.animalDirection.toUnitVector());
                 if (worldMap.canMoveTo(nextAnimalPosition)) {
-                    Vector2d previousPosition = this.getPosition();
                     this.setPosition(nextAnimalPosition);
-                    positionChanged(previousPosition, nextAnimalPosition);
                 }
             }
             case LEFT -> animalDirection = animalDirection.previous();
@@ -77,7 +75,7 @@ public class Animal extends WorldMapElement {
         return this.getPosition().equals(position);
     }
 
-    void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+    private void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
         this.observers.forEach(o -> o.positionChanged(oldPosition, newPosition));
     }
 

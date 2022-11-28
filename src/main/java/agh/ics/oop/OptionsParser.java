@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class OptionsParser {
 
-    List<MoveDirection> parse(List<String> pathToConvert) {
+    public List<MoveDirection> parse(List<String> pathToConvert) {
         return pathToConvert.stream().map(OptionsParser::getType).filter(Objects::nonNull).toList();
     }
 

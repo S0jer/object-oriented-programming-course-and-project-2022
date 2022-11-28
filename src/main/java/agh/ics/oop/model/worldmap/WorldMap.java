@@ -3,6 +3,8 @@ package agh.ics.oop.model.worldmap;
 import agh.ics.oop.model.Vector2d;
 import agh.ics.oop.model.mapobjects.WorldMapElement;
 
+import java.util.List;
+
 public interface WorldMap {
     /**
      * Indicate if any object can move to the given position.
@@ -28,7 +30,7 @@ public interface WorldMap {
      * @param position Position to check.
      * @return True if the position is occupied.
      */
-    boolean  isOccupied(Vector2d position);
+    boolean isOccupied(Vector2d position);
 
     /**
      * Return an object at a given position.
@@ -40,5 +42,5 @@ public interface WorldMap {
 
     void remove(Vector2d position);
 
-    void placeGrass(Integer grass);
+    List<Vector2d> getBorders();
 }

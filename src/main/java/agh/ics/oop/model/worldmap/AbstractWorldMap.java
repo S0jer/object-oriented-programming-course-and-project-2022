@@ -3,7 +3,6 @@ package agh.ics.oop.model.worldmap;
 import agh.ics.oop.PositionChangeObserver;
 import agh.ics.oop.model.mapobjects.Animal;
 import agh.ics.oop.model.Vector2d;
-import agh.ics.oop.model.mapobjects.Grass;
 import agh.ics.oop.model.mapobjects.WorldMapElement;
 
 import java.util.*;
@@ -27,8 +26,9 @@ public abstract class AbstractWorldMap implements PositionChangeObserver, WorldM
             worldMapElement.addObserver(this);
             worldMap.put(worldMapElement.getPosition(), worldMapElement);
             return true;
+        } else {
+            throw new IllegalArgumentException("Can not place WorldMapObject at " + worldMapElement.getPosition());
         }
-        return false;
     }
 
     @Override
@@ -49,28 +49,20 @@ public abstract class AbstractWorldMap implements PositionChangeObserver, WorldM
     @Override
     public String toString() {
         MapVisualizer mapVisualizer = new MapVisualizer(this);
-        updateBorders();
+        List<Vector2d> borders = getBorders();
+        this.lowerBorder = borders.get(0);
+        this.upperBorder = borders.get(1);
         return mapVisualizer.draw(this.lowerBorder, this.upperBorder);
-    }
-
-    private void updateBorders() {
-        worldMap.keySet().forEach(vector2d -> {
-            this.lowerBorder = this.lowerBorder.lowerLeft(vector2d);
-            this.upperBorder = this.upperBorder.upperRight(vector2d);
-        });
     }
 
     @Override
     public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
         WorldMapElement worldMapElement = worldMap.get(oldPosition);
         worldMap.remove(oldPosition);
-        if (worldMap.get(newPosition) instanceof Grass) {
-            this.placeGrass(1);
-        }
         worldMap.put(newPosition, worldMapElement);
     }
 
-    @Override
-    public void placeGrass(Integer grass) {
+    protected WorldMapElement get(Vector2d position) {
+        return this.objectAt(position);
     }
 }

@@ -4,6 +4,8 @@ package agh.ics.oop.model.worldmap;
 import agh.ics.oop.model.Vector2d;
 import agh.ics.oop.model.mapobjects.WorldMapElement;
 
+import java.util.List;
+
 public class RectangularMap extends AbstractWorldMap {
 
     private final Vector2d mapLowerBorder;
@@ -16,6 +18,10 @@ public class RectangularMap extends AbstractWorldMap {
         this.mapUpperBorder = mapUpperBorder;
     }
 
+    @Override
+    public List<Vector2d> getBorders() {
+        return List.of(mapLowerBorder, mapUpperBorder);
+    }
 
     @Override
     public boolean canMoveTo(Vector2d position) {
