@@ -11,10 +11,10 @@ import java.util.TreeSet;
 public class MapBoundary implements PositionChangeObserver {
 
     private final SortedSet<Vector2d> objectsVertically = new TreeSet<>((o1, o2) -> {
-        if (o2.y > o1.y || (o1.y == o2.y && o1.x < o2.x)) {
+        if (o2.getY() > o1.getY() || (o1.getY() == o2.getY() && o1.getX() < o2.getX())) {
             return -1;
 
-        }  else if (o1.x == o2.x && o1.y == o2.y) {
+        }  else if (o1.getX() == o2.getX() && o1.getY() == o2.getY()) {
             return 0;
         } else {
             return 1;
@@ -22,9 +22,9 @@ public class MapBoundary implements PositionChangeObserver {
     });
 
     private final SortedSet<Vector2d> objectsHorizontally = new TreeSet<>((o1, o2) -> {
-        if (o2.x > o1.x || (o1.x == o2.x && o1.y < o2.y)) {
+        if (o2.getX() > o1.getX() || (o1.getX() == o2.getX() && o1.getY() < o2.getY())) {
             return -1;
-        } else if (o1.x == o2.x && o1.y == o2.y) {
+        } else if (o1.getX() == o2.getX() && o1.getY() == o2.getY()) {
             return 0;
         }else {
             return 1;
@@ -48,6 +48,6 @@ public class MapBoundary implements PositionChangeObserver {
     }
 
     public List<Vector2d> getBoundaries() {
-        return List.of(new Vector2d(objectsHorizontally.first().x, objectsVertically.first().y), new Vector2d(objectsHorizontally.last().x, objectsVertically.last().y));
+        return List.of(new Vector2d(objectsHorizontally.first().getX(), objectsVertically.first().getY()), new Vector2d(objectsHorizontally.last().getX(), objectsVertically.last().getY()));
     }
 }

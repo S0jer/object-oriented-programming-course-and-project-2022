@@ -59,8 +59,8 @@ class Vector2dTest {
         Vector2d upperRightResult = vector1.upperRight(vector2);
 
         //Then
-        assertThat(upperRightResult.x).isEqualTo(expectedVector.x);
-        assertThat(upperRightResult.y).isEqualTo(expectedVector.y);
+        assertThat(upperRightResult.getX()).isEqualTo(expectedVector.getX());
+        assertThat(upperRightResult.getY()).isEqualTo(expectedVector.getY());
     }
 
     static Stream<Arguments> upperRightVerificationArgumentsProvider() {
@@ -79,8 +79,8 @@ class Vector2dTest {
         Vector2d lowerLeftResult = vector1.lowerLeft(vector2);
 
         //Then
-        assertThat(lowerLeftResult.x).isEqualTo(expectedVector.x);
-        assertThat(lowerLeftResult.y).isEqualTo(expectedVector.y);
+        assertThat(lowerLeftResult.getX()).isEqualTo(expectedVector.getX());
+        assertThat(lowerLeftResult.getY()).isEqualTo(expectedVector.getY());
     }
 
     static Stream<Arguments> lowerLeftVerificationArgumentsProvider() {
@@ -99,8 +99,8 @@ class Vector2dTest {
         Vector2d addResult = mainVector.add(toAddVector);
 
         //Then
-        assertThat(addResult.x).isEqualTo(expectedVector.x);
-        assertThat(addResult.y).isEqualTo(expectedVector.y);
+        assertThat(addResult.getX()).isEqualTo(expectedVector.getX());
+        assertThat(addResult.getY()).isEqualTo(expectedVector.getY());
     }
 
     static Stream<Arguments> addVerificationArgumentsProvider() {
@@ -119,8 +119,8 @@ class Vector2dTest {
         Vector2d subtractResult = mainVector.subtract(toSubtractVector);
 
         //Then
-        assertThat(subtractResult.x).isEqualTo(expectedVector.x);
-        assertThat(subtractResult.y).isEqualTo(expectedVector.y);
+        assertThat(subtractResult.getX()).isEqualTo(expectedVector.getX());
+        assertThat(subtractResult.getY()).isEqualTo(expectedVector.getY());
     }
 
     static Stream<Arguments> subtractVerificationArgumentsProvider() {
@@ -139,8 +139,8 @@ class Vector2dTest {
         Vector2d convertedVector = toConvertVector.opposite();
 
         //Then
-        assertThat(convertedVector.x).isEqualTo(expectedVector.x);
-        assertThat(convertedVector.y).isEqualTo(expectedVector.y);
+        assertThat(convertedVector.getX()).isEqualTo(expectedVector.getX());
+        assertThat(convertedVector.getY()).isEqualTo(expectedVector.getY());
     }
 
     static Stream<Arguments> oppositeVerificationArgumentsProvider() {

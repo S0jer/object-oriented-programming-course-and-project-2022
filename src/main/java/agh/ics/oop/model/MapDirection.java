@@ -2,17 +2,20 @@ package agh.ics.oop.model;
 
 
 public enum MapDirection {
-    NORTH("N", new Vector2d(0, 1)),
-    EAST("E", new Vector2d(1, 0)),
-    SOUTH("S", new Vector2d(0, -1)),
-    WEST("W", new Vector2d(-1, 0));
+    NORTH("N", new Vector2d(0, 1), "up.png"),
+    EAST("E", new Vector2d(1, 0), "right.png"),
+    SOUTH("S", new Vector2d(0, -1), "down.png"),
+    WEST("W", new Vector2d(-1, 0), "left.png");
 
     private final String directionName;
     private final Vector2d unitVector;
 
-    MapDirection(String directionName, Vector2d unitVector) {
+    private final String viewName;
+
+    MapDirection(String directionName, Vector2d unitVector, String viewName) {
         this.directionName = directionName;
         this.unitVector = unitVector;
+        this.viewName = viewName;
     }
 
     public MapDirection next() {
@@ -26,6 +29,10 @@ public enum MapDirection {
 
     public Vector2d toUnitVector() {
         return this.unitVector;
+    }
+
+    public String getViewName() {
+        return this.viewName;
     }
 
     @Override

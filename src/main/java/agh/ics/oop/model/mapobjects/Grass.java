@@ -27,6 +27,11 @@ public class Grass extends WorldMapElement {
     }
 
     @Override
+    public String getViewName() {
+        return "grass.png";
+    }
+
+    @Override
     public String toString() {
         return "*";
     }

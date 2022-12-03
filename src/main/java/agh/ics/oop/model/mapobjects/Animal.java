@@ -90,6 +90,11 @@ public class Animal extends WorldMapElement {
     }
 
     @Override
+    public String getViewName() {
+        return this.animalDirection.getViewName();
+    }
+
+    @Override
     public String toString() {
         return animalDirection.toString();
     }
