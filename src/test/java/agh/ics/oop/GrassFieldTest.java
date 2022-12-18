@@ -149,17 +149,4 @@ class GrassFieldTest {
         //then
         assertThat(result).isFalse();
     }
-
-    @Test
-    void shouldGrassIsRemoved() {
-        //given
-        WorldMap map = new GrassField(0);
-        Vector2d grassPosition = new Vector2d(1, 1);
-
-        //when
-        map.remove(grassPosition);
-
-        //then
-        assertThat(map.objectAt(grassPosition)).isNull();
-    }
 }

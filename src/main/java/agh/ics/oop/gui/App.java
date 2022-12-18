@@ -48,7 +48,7 @@ public class App extends Application implements PositionChangeObserver {
             this.engine.addObserver(this);
             this.moveDelay = 1000;
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             exit(0);
         }
     }
@@ -125,7 +125,11 @@ public class App extends Application implements PositionChangeObserver {
                 Vector2d pos = new Vector2d(x, y);
                 if (this.map.isOccupied(pos)) {
                     WorldMapElement worldMapElement = this.map.objectAt(pos);
-                    this.grid.add(new GuiElementBox(worldMapElement).getvBox(), x - minX + 1, maxY + 2 - y, 1, 1);
+                    try {
+                        this.grid.add(new GuiElementBox(worldMapElement).getvBox(), x - minX + 1, maxY + 2 - y, 1, 1);
+                    } catch (ImageNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }

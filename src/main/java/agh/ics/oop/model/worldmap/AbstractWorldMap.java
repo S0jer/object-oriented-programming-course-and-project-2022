@@ -41,11 +41,6 @@ public abstract class AbstractWorldMap implements PositionChangeObserver, WorldM
         return worldMap.get(position);
     }
 
-    public void remove(Vector2d removePosition) {
-        worldMap.remove(removePosition);
-    }
-
-
     @Override
     public String toString() {
         MapVisualizer mapVisualizer = new MapVisualizer(this);

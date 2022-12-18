@@ -9,9 +9,9 @@ import javafx.scene.layout.VBox;
 import java.util.Objects;
 
 public class GuiElementBox {
-    private VBox vBox;
+    private final VBox vBox;
 
-    public GuiElementBox(WorldMapElement worldMapElement) {
+    public GuiElementBox(WorldMapElement worldMapElement) throws ImageNotFoundException {
         try {
             Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(worldMapElement.getViewName())));
             ImageView imageView = new ImageView(image);
@@ -21,7 +21,7 @@ public class GuiElementBox {
             this.vBox = new VBox(imageView, label);
             vBox.setAlignment(Pos.CENTER);
         } catch (NullPointerException e) {
-            e.printStackTrace();
+            throw new ImageNotFoundException("Image not found in resources!", e);
         }
     }
 

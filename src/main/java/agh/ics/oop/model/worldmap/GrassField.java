@@ -30,10 +30,11 @@ public class GrassField extends AbstractWorldMap {
 
     @Override
     public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
-        if (super.get(newPosition) instanceof Grass) {
+        WorldMapElement elementFromNewPosition = super.get(newPosition);
+        super.positionChanged(oldPosition, newPosition);
+        if (elementFromNewPosition instanceof Grass) {
             this.placeGrass(1);
         }
-        super.positionChanged(oldPosition, newPosition);
     }
 
     private void placeGrass(Integer grassToPlace) {

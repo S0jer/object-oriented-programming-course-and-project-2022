@@ -40,7 +40,5 @@ public interface WorldMap {
      */
     WorldMapElement objectAt(Vector2d position);
 
-    void remove(Vector2d position);
-
     List<Vector2d> getBorders();
 }
