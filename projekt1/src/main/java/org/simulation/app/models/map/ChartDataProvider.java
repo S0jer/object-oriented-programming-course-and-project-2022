@@ -3,14 +3,14 @@ package org.simulation.app.models.map;
 import org.simulation.app.models.mapelement.Animal;
 
 public class ChartDataProvider {
-    AbstractWorldMap worldMap;
+    AbstractWorldMap worldMap;  // modyfikator dostępu
 
     public ChartDataProvider(AbstractWorldMap worldMap) {
         this.worldMap = worldMap;
     }
 
     public int countEmpty() {
-        return this.worldMap.getRightTopCorner().getX()* this.worldMap.getRightTopCorner().getY() -
+        return this.worldMap.getRightTopCorner().getX() * this.worldMap.getRightTopCorner().getY() -
                 (this.worldMap.getAnimalsOnMap().size() + this.worldMap.getPlantsOnMap().size());
     }
 

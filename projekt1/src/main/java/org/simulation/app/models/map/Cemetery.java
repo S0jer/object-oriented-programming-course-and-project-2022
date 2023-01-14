@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class Cemetery {
     private final Map<Vector2d, Integer> cemeteryMap = new HashMap<>();
-    Integer width = EnvironmentVariables.getMapWidth();
+    Integer width = EnvironmentVariables.getMapWidth();  // modyfikator dostępu
     Integer height = EnvironmentVariables.getMapHeight();
     Integer minDeathsCounter;
     Integer minDeathsValue = 0;

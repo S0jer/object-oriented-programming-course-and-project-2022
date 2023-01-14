@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CsvWriter {
 
-    List<String[]> csvData;
+    List<String[]> csvData;  // modyfikator dostępu
 
     public CsvWriter() {
         csvData = new ArrayList<>();
@@ -21,7 +21,7 @@ public class CsvWriter {
         try (CSVWriter writer = new CSVWriter(new FileWriter(".\\simulationData.csv"))) {
             writer.writeAll(csvData);
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace();  // słaba obsługa wyjątku
         }
     }
 

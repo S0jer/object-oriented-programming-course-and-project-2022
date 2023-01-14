@@ -4,9 +4,9 @@ public class Gene implements Comparable<Gene> {
 
     private final Integer value;
 
-    public Gene(int gene) {
-        if (gene < 0 || gene > 7) throw new IllegalArgumentException();
-        this.value = gene;
+    public Gene(int value) {
+        if (value < 0 || value > 7) throw new IllegalArgumentException();
+        this.value = value;
     }
 
     @Override
@@ -20,16 +20,16 @@ public class Gene implements Comparable<Gene> {
 
     @Override
     public int compareTo(Gene o) {
-        return Integer.compare(this.getValue(), o.getValue());
+        return Integer.compare(this.value, o.value);
     }
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        return super.equals(obj); // no-no
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return super.hashCode(); // no-no
     }
 }

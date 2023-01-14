@@ -6,8 +6,8 @@ import org.simulation.app.models.mapelement.envvariables.EnvironmentVariables;
 import java.util.List;
 
 public class Genotype {
-    private List<Gene> gens;
-    private Integer currentGen;
+    private List<Gene> gens; // może final?
+    private Integer currentGen; // gene - konsekwentnie
     private final Integer genesSize;
     private final RandomBehaviorGenerator randomBehaviorGenerator = new RandomBehaviorGenerator();
 
@@ -25,7 +25,7 @@ public class Genotype {
     }
 
     private void mutation(boolean isRandomMutation) {
-        if (isRandomMutation) {
+        if (isRandomMutation) {  // if nie jest najlepszym rozwiązaniem
             this.gens = this.gens.stream().map(x -> {
                 int mute = randomBehaviorGenerator.numberToGenerator(2);
                 if (mute == 1) return new Gene(randomBehaviorGenerator.numberToGenerator(8));
@@ -66,6 +66,6 @@ public class Genotype {
     }
 
     public List<Gene> getGens() {
-        return gens;
+        return gens;  // dehermetyzacja
     }
 }

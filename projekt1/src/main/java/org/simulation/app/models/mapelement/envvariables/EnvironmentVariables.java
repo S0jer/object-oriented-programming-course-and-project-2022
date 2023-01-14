@@ -1,7 +1,7 @@
 package org.simulation.app.models.mapelement.envvariables;
 
 public class EnvironmentVariables {
-    private static int MAP_WIDTH = 20;
+    private static int MAP_WIDTH = 20; // a gdybym chciał dwie mapy z różnymi ustawieniami? bo chcę
     private static int MAP_HEIGHT = 20;
     private static boolean HELL = false;
     private static int PLANTS_QUANTITY = 70;

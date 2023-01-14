@@ -27,7 +27,7 @@ public class Energy {
         energyCount += EnvironmentVariables.getPlantsEnergy();
     }
 
-    public boolean isDead() {
-        return this.energyCount > 0;
+    public boolean isDead() { // nieczytelne - martwa energia?
+        return this.energyCount > 0;  // na pewno > ?
     }
 }

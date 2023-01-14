@@ -6,7 +6,7 @@ import org.simulation.app.models.mapelement.elementcharacteristics.Vector2d;
 
 import java.util.List;
 
-public interface WorldMap {
+public interface WorldMap { // I...
 
     Vector2d canMoveTo(Vector2d oldPosition, Vector2d newPosition);
 

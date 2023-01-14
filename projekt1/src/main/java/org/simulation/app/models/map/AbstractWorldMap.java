@@ -118,7 +118,7 @@ public abstract class AbstractWorldMap implements WorldMap, PositionChangeObserv
         }
     }
 
-    private void breedOnPosition(int x, int y) {
+    private void breedOnPosition(int x, int y) {  // czemu nie Vector?
         List<Animal> animalsOnPos = animalsAt(new Vector2d(x, y));
         if (animalsOnPos != null) {
             List<Animal> animalsOnPosForBreed = animalsForBreed(animalsOnPos);
@@ -164,7 +164,7 @@ public abstract class AbstractWorldMap implements WorldMap, PositionChangeObserv
     }
 
     @Override
-    public Genotype countDominantGenome() {
+    public Genotype countDominantGenome() {  // czy tym powinna się zajmować mapa?
         Map<Genotype, Integer> ranking = new HashMap<>();
         ranking.put(new Genotype(new ArrayList<>()), 1);
         for (Animal animal : this.animalsOnMap) {
@@ -178,7 +178,7 @@ public abstract class AbstractWorldMap implements WorldMap, PositionChangeObserv
         return Collections.max(ranking.entrySet(), Map.Entry.comparingByValue()).getKey();
     }
 
-    public boolean isRunning() {
+    public boolean isRunning() {  // jw.
         return this.isRunning;
     }
 
@@ -207,7 +207,7 @@ public abstract class AbstractWorldMap implements WorldMap, PositionChangeObserv
     }
 
     public Set<Animal> getAnimalsOnMap() {
-        return animalsOnMap;
+        return animalsOnMap;  // dehermetyzacja
     }
 
     public Set<Animal> getDeadAnimals() {

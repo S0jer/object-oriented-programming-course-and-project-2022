@@ -126,11 +126,11 @@ public class App extends Application implements DayFinishedObserver {
         Button stopButton = new Button("stop");
         stopButton.setOnAction((event -> {
             if (map.isRunning()) {
-                this.engineThread.suspend();
+                this.engineThread.suspend(); // to jest zła metoda; należy używać wait i notify
                 map.setRunning(false);
                 stopButton.setText("start");
             } else {
-                this.engineThread.resume();
+                this.engineThread.resume(); // jw.
                 map.setRunning(true);
                 stopButton.setText("stop");
             }

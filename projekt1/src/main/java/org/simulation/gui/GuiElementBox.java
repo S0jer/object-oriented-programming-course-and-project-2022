@@ -25,7 +25,7 @@ public class GuiElementBox {
             this.vBox = new VBox(imageView);
             this.vBox.setAlignment(Pos.CENTER);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            e.printStackTrace();  // słaba obsługa wyjątku
         }
     }
 }

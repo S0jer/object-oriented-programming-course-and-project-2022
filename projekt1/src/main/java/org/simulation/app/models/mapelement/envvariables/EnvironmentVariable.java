@@ -1,6 +1,6 @@
 package org.simulation.app.models.mapelement.envvariables;
 
-public enum EnvironmentVariable {
+public enum EnvironmentVariable {  // to chyba nie jest używane
     MAP_WIDTH,
     MAP_HEIGHT,
     HELL,

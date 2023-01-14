@@ -19,7 +19,7 @@ public class Animal implements MapElement, Comparable<Animal> {
 
     private final WorldMap worldMap;
     private Vector2d animalPosition;
-    private final Energy animalEnergy;
+    private final Energy animalEnergy; // nie lepiej zrobić obiekt enegii niemodyfikowalny niż ustawiać pole jako final? per analogia do pozycji
     private MapDirection animalMapDirection;
     private final Set<PositionChangeObserver> observers = new HashSet<>();
     private final RandomBehaviorGenerator randomBehaviorGenerator = new RandomBehaviorGenerator();
@@ -30,7 +30,7 @@ public class Animal implements MapElement, Comparable<Animal> {
 
     private final Genotype genotype;
     private int plantsEaten = 0;
-    private boolean marked = false;
+    private boolean marked = false;  // co to znaczy? i czy to na pewno powinno być w zwierzęciu?
 
 
     public Animal(WorldMap worldMap, Vector2d animalPosition, Integer animalEnergy, MapDirection animalMapDirection, List<Integer> animalGens) {
@@ -44,7 +44,7 @@ public class Animal implements MapElement, Comparable<Animal> {
     }
 
     public Animal(WorldMap worldMap, Vector2d animalPosition, Integer animalEnergy) {
-        List<Integer> animalGens = new ArrayList<>();
+        List<Integer> animalGens = new ArrayList<>(); // to powinien robić genotyp
         for (int i = 0; i < EnvironmentVariables.getGenomeSize(); i++) {
             animalGens.add(randomBehaviorGenerator.numberToGenerator(8));
         }
@@ -61,8 +61,8 @@ public class Animal implements MapElement, Comparable<Animal> {
         this.changeDirection(this.genotype.getCurrentGene());
         Vector2d oldAnimalPosition = this.animalPosition;
         Vector2d newAnimalPosition = this.animalPosition.add(this.animalMapDirection.toUnitVector());
-        Vector2d properPosition = this.worldMap.canMoveTo(oldAnimalPosition, newAnimalPosition);
-        if (EnvironmentVariables.isHELL() && !newAnimalPosition.equals(properPosition))
+        Vector2d properPosition = this.worldMap.canMoveTo(oldAnimalPosition, newAnimalPosition); // nazwa metody nieadekwatna
+        if (EnvironmentVariables.isHELL() && !newAnimalPosition.equals(properPosition))  // if nie jest najlepszym rozwiązaniem; zwłaszcza if w zwierzęciu
             this.animalEnergy.lose(EnvironmentVariables.getMinPropagationEnergy());
         loseMoveEnergy();
         this.animalPosition = properPosition;
@@ -137,7 +137,7 @@ public class Animal implements MapElement, Comparable<Animal> {
         this.lifetime += 1;
     }
 
-    public Animal breed(Animal secondParent) {
+    public Animal breed(Animal secondParent) {  // do przemyślenia, czy nie lepiej z tego zrobić metodę statyczną przyjmującą dwa zwierzęta
         Integer commonEnergy = this.animalEnergy.getEnergyCount() + secondParent.getEnergy().getEnergyCount();
         Integer firstParentP = this.animalEnergy.getEnergyCount() / commonEnergy;
         Integer secondParentP = secondParent.getEnergy().getEnergyCount() / commonEnergy;
@@ -156,7 +156,7 @@ public class Animal implements MapElement, Comparable<Animal> {
         return this.animalEnergy.getEnergyCount() * firstParentP + secondParent.getEnergy().getEnergyCount() * secondParentP;
     }
 
-    private List<Integer> generateChildGenes(Animal secondParent, Integer firstParentP, Integer secondParentP) {
+    private List<Integer> generateChildGenes(Animal secondParent, Integer firstParentP, Integer secondParentP) { // to powinno być w genotypie
         List<Gene> animalGens = new ArrayList<>();
         List<Integer> animalsGensValues;
         int getBorderPoint = generateBorderPoint(firstParentP, secondParentP);

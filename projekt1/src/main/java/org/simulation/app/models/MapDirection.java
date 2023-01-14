@@ -8,7 +8,7 @@ import java.util.List;
 
 public enum MapDirection {
 
-    NORTH("N", new Vector2d(0, 1), new ArrayList<>(Arrays.asList("src/main/resources/animals/up-yellow.png", "src/main/resources/animals/up-orange.png", "src/main/resources/animals/up-red.png", "src/main/resources/animals/special.png"))),
+    NORTH("N", new Vector2d(0, 1), new ArrayList<>(Arrays.asList("src/main/resources/animals/up-yellow.png", "src/main/resources/animals/up-orange.png", "src/main/resources/animals/up-red.png", "src/main/resources/animals/special.png"))), // te ścieżki są tworzone wg pewnego klucza; nie lepiej to oprogramować?
     NORTHEAST("NE", new Vector2d(1, 1), new ArrayList<>(Arrays.asList("src/main/resources/animals/northeast-yellow.png", "src/main/resources/animals/northeast-orange.png", "src/main/resources/animals/northeast-red.png", "src/main/resources/animals/special.png"))),
     EAST("E", new Vector2d(1, 0), new ArrayList<>(Arrays.asList("src/main/resources/animals/right-yellow.png", "src/main/resources/animals/right-orange.png", "src/main/resources/animals/right-red.png", "src/main/resources/animals/special.png"))),
     SOUTHEAST("SE", new Vector2d(1, -1), new ArrayList<>(Arrays.asList("src/main/resources/animals/southeast-yellow.png", "src/main/resources/animals/southeast-orange.png", "src/main/resources/animals/southeast-red.png", "src/main/resources/animals/special.png"))),

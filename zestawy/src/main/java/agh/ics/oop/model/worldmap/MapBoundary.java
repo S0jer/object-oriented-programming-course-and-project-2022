@@ -14,7 +14,7 @@ public class MapBoundary implements PositionChangeObserver {
         if (o2.getY() > o1.getY() || (o1.getY() == o2.getY() && o1.getX() < o2.getX())) {
             return -1;
 
-        }  else if (o1.getX() == o2.getX() && o1.getY() == o2.getY()) {
+        } else if (o1.getX() == o2.getX() && o1.getY() == o2.getY()) {
             return 0;
         } else {
             return 1;
@@ -26,7 +26,7 @@ public class MapBoundary implements PositionChangeObserver {
             return -1;
         } else if (o1.getX() == o2.getX() && o1.getY() == o2.getY()) {
             return 0;
-        }else {
+        } else {
             return 1;
         }
     });

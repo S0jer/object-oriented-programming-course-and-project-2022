@@ -38,10 +38,10 @@ public class ThreadSimulationEngine implements Engine, Runnable {
         int i = 0;
         String mapToString = map.toString();
         logger.log(Level.INFO, mapToString);
-        for (MoveDirection move: directions){
-            Vector2d oldPosition = this.animalsFromMap.get(i%numberOfAnimals).getPosition();
-            this.animalsFromMap.get(i%numberOfAnimals).moveAnimal(move);
-            Vector2d newPosition = this.animalsFromMap.get(i%numberOfAnimals).getPosition();
+        for (MoveDirection move : directions) {
+            Vector2d oldPosition = this.animalsFromMap.get(i % numberOfAnimals).getPosition();
+            this.animalsFromMap.get(i % numberOfAnimals).moveAnimal(move);
+            Vector2d newPosition = this.animalsFromMap.get(i % numberOfAnimals).getPosition();
             positionChanged(oldPosition, newPosition);
             i++;
             mapToString = map.toString();

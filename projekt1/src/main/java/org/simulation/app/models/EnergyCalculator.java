@@ -7,7 +7,7 @@ public class EnergyCalculator {
     private static final Energy moveEnergy = new Energy(EnvironmentVariables.getMoveEnergy());
     private static final Energy breedEnergy = new Energy(EnvironmentVariables.getMinPropagationEnergy());
 
-    public static boolean canBreed(Energy currentEnergy) {
+    public static boolean canBreed(Energy currentEnergy) {  // nieczytelne - czy energia się może rozmnażać?
         return currentEnergy.getEnergyCount() > breedEnergy.getEnergyCount();
     }
 }

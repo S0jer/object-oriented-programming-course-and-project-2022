@@ -34,7 +34,7 @@ public class Plant implements MapElement {
 
     private Vector2d plantPlant() {
         int poolChooseNumber = randomBehaviorGenerator.behaviorGenerator();
-        if (EnvironmentVariables.isCORPSES()) {
+        if (EnvironmentVariables.isCORPSES()) {  // if nie jest najlepszym rozwiązaniem
             return corpsesPlanter(poolChooseNumber);
         } else {
             return defaultPlanter(poolChooseNumber);

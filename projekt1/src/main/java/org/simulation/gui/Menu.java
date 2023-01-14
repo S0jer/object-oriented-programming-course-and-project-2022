@@ -87,11 +87,13 @@ public class Menu {
                 case HELL -> EnvironmentVariables.setHELL(Boolean.parseBoolean(value.getText()));
                 case PLANTS_QUANTITY -> EnvironmentVariables.setPlantsQuantity(Integer.parseInt(value.getText()));
                 case PLANTS_ENERGY -> EnvironmentVariables.setPlantsEnergy(Integer.parseInt(value.getText()));
-                case NEW_PLANTS_QUANTITY -> EnvironmentVariables.setNewPlantsQuantity(Integer.parseInt(value.getText()));
+                case NEW_PLANTS_QUANTITY ->
+                        EnvironmentVariables.setNewPlantsQuantity(Integer.parseInt(value.getText()));
                 case CORPSES -> EnvironmentVariables.setCORPSES(Boolean.parseBoolean(value.getText()));
                 case ANIMALS_QUANTITY -> EnvironmentVariables.setAnimalsQuantity(Integer.parseInt(value.getText()));
                 case ANIMAL_ENERGY -> EnvironmentVariables.setAnimalEnergy(Integer.parseInt(value.getText()));
-                case MIN_PROPAGATION_ENERGY -> EnvironmentVariables.setMinPropagationEnergy(Integer.parseInt(value.getText()));
+                case MIN_PROPAGATION_ENERGY ->
+                        EnvironmentVariables.setMinPropagationEnergy(Integer.parseInt(value.getText()));
                 case PROPAGATION_LOSS -> EnvironmentVariables.setPropagationLoss(Integer.parseInt(value.getText()));
                 case RANDOM_MUTATION -> EnvironmentVariables.setRandomMutation(Boolean.parseBoolean(value.getText()));
                 case GENOME_SIZE -> EnvironmentVariables.setGenomeSize(Integer.parseInt(value.getText()));

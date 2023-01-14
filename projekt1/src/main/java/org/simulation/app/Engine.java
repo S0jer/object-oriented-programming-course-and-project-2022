@@ -1,5 +1,5 @@
 package org.simulation.app;
 
-public interface Engine {
+public interface Engine {  // IEngine
     void run();
 }

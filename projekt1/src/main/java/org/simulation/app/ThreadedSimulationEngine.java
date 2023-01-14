@@ -31,7 +31,7 @@ public class ThreadedSimulationEngine implements Engine, Runnable {
             try {
                 Thread.sleep(moveDelay);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                e.printStackTrace();  // słaba obsługa wyjątku
             }
         }
     }

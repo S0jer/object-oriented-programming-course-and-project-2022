@@ -9,6 +9,8 @@ public interface MapElement {
     Vector2d getPosition();
 
     void addObserver(PositionChangeObserver positionChangeObserver);
+
     String getViewName();
+
     void removeObserver(PositionChangeObserver positionChangeObserver);
 }
